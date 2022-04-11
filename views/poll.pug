@@ -1,0 +1,27 @@
+html
+    head
+        link(
+            rel="stylesheet",
+            id="wpts_ui_css-css",
+            href="/style.css",
+            type="text/css",
+            media="all",
+        )
+        title Vote Now
+    body
+        h1 Your opinion matters! Answer the question below
+        form
+            fieldset
+                legend= question
+                each answer, i in answers
+                    div
+                        input(
+                            type="checkbox",
+                            id=`answer-${i}`,
+                            name=`answer[${i}]`,
+                            value=answer,
+                        )
+                        label(for=`answer-${i}`)=answer
+                button(id='vote') vote
+        button(class="btn") Results
+        button(class="btn") Share
