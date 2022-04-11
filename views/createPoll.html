@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" id="wpts_ui_css-css" href="/style.css" type="text/css" media="all">
+    <meta charset="UTF-8">
+    <title>VoteNow</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log("onload");
+            const addNewAnswerButton = document.getElementById('add-new-answer-btn');
+            const form = document.getElementsByTagName('form')[0];
+
+            let currentAnswerNumber = 1;
+
+            addNewAnswerButton.addEventListener('click', function () {
+                const labelEl = document.createElement('label');
+                const answerId = `answer-${currentAnswerNumber}`;
+                labelEl.htmlFor = answerId; // string interpolation
+                labelEl.textContent = `Add answer ${currentAnswerNumber + 1}`;
+
+                const answerInputEl = document.createElement('input');
+                answerInputEl.id = answerId;
+                answerInputEl.name = `answers[${currentAnswerNumber}]`;
+                answerInputEl.type = 'text';
+
+
+                const answerContainer = document.createElement('div');
+                answerContainer.append(labelEl, answerInputEl);
+
+
+                form.insertBefore(answerContainer, addNewAnswerButton);
+
+                currentAnswerNumber++;
+                console.log("addNewAnswerButton.onclick");
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>
+    Your opinion matters! Answer the question below
+</h1>
+<form method="post" action="/createPoll">
+    <div>
+        <label for="question"> Specify your question</label>
+        <input type="text" id="question" name="question">
+    </div>
+    <div>
+        <label for="answer-0">Add answer 1</label>
+        <input type="text" id="answer-0" name="answers[0]">
+    </div>
+
+    <button id="add-new-answer-btn" type="button">Add new answer</button>
+    <button id="submit" type="submit">Submit form</button>
+</form>
+
+<button class="btn">
+    Vote
+</button>
+
+<button class="btn">
+    Results
+</button>
+
+<button class="btn">
+    Share
+</button>
+</body>
+</html>
