@@ -6,6 +6,7 @@ const port = 3000;
 
 const polls = {}; // {id: {question: string, answers: string[], votes: number[] }}
 
+
 app.set('view engine', 'pug');
 
 app.use(express.static("public"));
@@ -33,6 +34,7 @@ app.post('/createPoll', function (req, res) {
         answers: answers,
         votes: votes,
         pollId: pollId,
+        voteCount: 0,
     };
     res.redirect(303, `/poll/${pollId}`);
 });
@@ -56,14 +58,21 @@ app.post('/poll/:pollId/vote', function (req, res) {
         .forEach((voteIndex) => {
             polls[pollId].votes[voteIndex] = polls[pollId].votes[voteIndex] + 1;
         });
-
+    polls[pollId].voteCount += 1;
 
     res.redirect(303, `/poll/${pollId}/results`);
 });
 
-app.get('/poll/:pollId/results', function (req, res){
+app.get('/poll/:pollId/results', function (req, res) {
     var pollId = req.params["pollId"];
-    res.render("results", polls[pollId])
+    const poll = polls[pollId]
+
+    res.render(
+        "results",
+        {
+            ...polls[pollId],
+            percentages: poll.votes.map(vote => Math.floor(vote / poll.voteCount * 100 * 100) / 100)
+        })
 });
 
 app.listen(port, () => {

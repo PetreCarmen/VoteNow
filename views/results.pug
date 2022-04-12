@@ -10,7 +10,10 @@ html
         title Vote Now
     body
         h1 You can see the poll results below:
-            p= question
-            each answer, i in answers
-                p=`${answer}: ${votes[i]}`
+        p= question
+        each answer, i in answers
+            p=`${answer}: ${votes[i]}`
+            div(class="percentBarContainer")
+                div(style=`width:${percentages[i]}%`, class="percentBar")=percentages[i] + "%"
+        p= `Total votes: ${voteCount}`
         button(class="btn") Share

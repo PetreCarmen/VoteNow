@@ -46,5 +46,16 @@ form fieldset div {
     font-weight: bold;
 }
 
+.percentBarContainer {
+    border: 1px solid #4C5C72;
+    height: 24px;
+    width: 40%;
+    margin: auto;
+}
+
+.percentBar {
+    height: inherit;
+    background-color: #a26b89;
+}
 
 
