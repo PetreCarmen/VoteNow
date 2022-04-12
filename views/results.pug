@@ -1,0 +1,16 @@
+html
+    head
+        link(
+            rel="stylesheet",
+            id="wpts_ui_css-css",
+            href="/style.css",
+            type="text/css",
+            media="all",
+        )
+        title Vote Now
+    body
+        h1 You can see the poll results below:
+            p= question
+            each answer, i in answers
+                p=`${answer}: ${votes[i]}`
+        button(class="btn") Share

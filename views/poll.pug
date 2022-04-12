@@ -10,7 +10,7 @@ html
         title Vote Now
     body
         h1 Your opinion matters! Answer the question below
-        form
+        form(method="post", action=`/poll/${pollId}/vote`)
             fieldset
                 legend= question
                 each answer, i in answers
@@ -19,7 +19,7 @@ html
                             type="checkbox",
                             id=`answer-${i}`,
                             name=`answer[${i}]`,
-                            value=answer,
+                            value=i,
                         )
                         label(for=`answer-${i}`)=answer
                 button(id='vote') vote
